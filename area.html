@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="area.css" />
+  </head>
+  <body>
+    <div id="main_div">
+      <div>
+        <h3>Choose Shape</h3>
+        <div id="button_div">
+          <div>
+            <h2>Area:</h2>
+            <input
+              type="button"
+              value="⬜"
+              onclick="calculate_area('square')"
+            />
+            <input
+              type="button"
+              value="🔺"
+              onclick="calculate_area('triangle')"
+            />
+            <input
+              type="button"
+              value="⚪"
+              onclick="calculate_area('circle')"
+            />
+          </div>
+          <div>
+            <h2>Volume:</h2>
+            <input
+              type="button"
+              value="🎲"
+              onclick="calculate_volume('cube')"
+            />
+            <input
+              type="button"
+              value="🌐"
+              onclick="calculate_volume('sphear')"
+            />
+            <input
+              type="button"
+              value="🛢️"
+              onclick="calculate_volume('cylinder')"
+            />
+          </div>
+          <div>
+            <!-- Area -->
+            <input type="number" placeholder="Base" id="b" hidden />
+            <input type="number" placeholder="Height" id="h" hidden />
+            <input type="number" placeholder="Radius" id="r" hidden />
+            <!-- Volume -->
+            <input type="number" placeholder="Base l 1" id="b_l1" hidden />
+            <input type="number" placeholder="Base l 2" id="b_l2" hidden />
+            <input type="number" placeholder="Height" id="h_v" hidden />
+            <input type="number" placeholder="Radius" id="r_v" hidden />
+          </div>
+          <div>
+            <input type="number" id="ans" placeholder="ans" readonly hidden />
+            <input type="number" id="sha" placeholder="Shape" readonly hidden />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var ans;
+      var sha = document.getElementById("sha");
+      var b_Input = document.getElementById("b");
+      var h_Input = document.getElementById("h");
+      var r_Input = document.getElementById("r");
+      var b_l1_Input = document.getElementById("b_l1");
+      var b_l2_Input = document.getElementById("b_l2");
+      var h_v_Input = document.getElementById("h_v");
+      var r_v_Input = document.getElementById("r_v");
+      function calculate_area(shape) {
+        document.getElementById("sha").hidden = false;
+        document.getElementById("ans").hidden = false;
+        b_Input.hidden = true;
+        h_Input.hidden = true;
+        r_Input.hidden = true;
+        b_l1_Input.hidden = true;
+        b_l2_Input.hidden = true;
+        h_v_Input.hidden = true;
+        r_v_Input.hidden = true;
+
+        let b = document.getElementById("b").value;
+        let h = document.getElementById("h").value;
+        let r = document.getElementById("r").value;
+        switch (shape) {
+          case "square":
+            b_Input.hidden = false;
+            h_Input.hidden = false;
+            sha.placeholder = "Square";
+            ans = b * h;
+            break;
+          case "triangle":
+            b_Input.hidden = false;
+            h_Input.hidden = false;
+            sha.placeholder = "Triangle";
+            ans = (1 / 2) * b * h;
+            break;
+          case "circle":
+            r_Input.hidden = false;
+            sha.placeholder = "Circle";
+            ans = 3.1416 * Math.pow(r, 2);
+            break;
+        }
+        document.getElementById("ans").value = ans;
+        document.getElementById("b").addEventListener("input", function () {
+          calculate_area(shape);
+        });
+        document.getElementById("h").addEventListener("input", function () {
+          calculate_area(shape);
+        });
+        document.getElementById("r").addEventListener("input", function () {
+          calculate_area(shape);
+        });
+      }
+      // ---------------------------------------------------------------------------------------------------------------
+      function calculate_volume(shape_v) {
+        document.getElementById("sha").hidden = false;
+        document.getElementById("ans").hidden = false;
+        b_Input.hidden = true;
+        h_Input.hidden = true;
+        r_Input.hidden = true;
+        b_l1_Input.hidden = true;
+        b_l2_Input.hidden = true;
+        h_v_Input.hidden = true;
+        r_v_Input.hidden = true;
+
+        let b_l1 = document.getElementById("b_l1").value;
+        let b_l2 = document.getElementById("b_l2").value;
+        let h_v = document.getElementById("h_v").value;
+        let r_v = document.getElementById("r_v").value;
+
+        switch (shape_v) {
+          case "cube":
+            b_l1_Input.hidden = false;
+            b_l2_Input.hidden = false;
+            h_v_Input.hidden = false;
+            ans = b_l1 * b_l2 * h_v;
+            sha.placeholder = "Cube";
+            break;
+          case "sphear":
+            r_v_Input.hidden = false;
+            ans = (4 / 3) * 3.1416 * Math.pow(r_v, 3);
+            sha.placeholder = "Sphear";
+            break;
+          case "cylinder":
+            r_v_Input.hidden = false;
+            h_v_Input.hidden = false;
+            ans = 3.1416 * Math.pow(r_v, 2) * h_v;
+            sha.placeholder = "Cylinder";
+            break;
+        }
+        document.getElementById("ans").value = ans;
+        document.getElementById("b_l1").addEventListener("input", function () {
+          calculate_volume(shape_v);
+        });
+        document.getElementById("b_l2").addEventListener("input", function () {
+          calculate_volume(shape_v);
+        });
+        document.getElementById("h_v").addEventListener("input", function () {
+          calculate_volume(shape_v);
+        });
+        document.getElementById("r_v").addEventListener("input", function () {
+          calculate_volume(shape_v);
+        });
+      }
+    </script>
+  </body>
+</html>
